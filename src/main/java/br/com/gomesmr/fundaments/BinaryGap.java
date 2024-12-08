@@ -24,7 +24,7 @@ public class BinaryGap {
         System.out.println("Solution is: " + solution(N));
     }
 
-    private static int solution(int N) {
+    protected static int solution(int N) {
         String number = Integer.toBinaryString(N);
 
         int binaryGap = 0;
@@ -44,7 +44,7 @@ public class BinaryGap {
         return binaryGap;
     }
 
-    private static String formatBinaryRepresentation(String binaryString) {
+    public static String formatBinaryRepresentation(String binaryString) {
 
         int length = binaryString.length();
         int div = length / 4;
@@ -82,7 +82,7 @@ public class BinaryGap {
         return new String(arrayWithSeparator);
     }
 
-    private static int finalLength(int length, int div, int rest) {
+    public static int finalLength(int length, int div, int rest) {
         if (rest > 0) {
             return length + div;
         }
