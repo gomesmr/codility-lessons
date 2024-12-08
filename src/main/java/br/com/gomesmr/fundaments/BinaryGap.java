@@ -3,7 +3,28 @@ package br.com.gomesmr.fundaments;
 import java.util.Scanner;
 
 public class BinaryGap {
-    public static int solution(int N) {
+    public static void main(String[] args) {
+//        int N = 1376796946;   101_0010_0001_0000_0100_0001_0001_0010      div 7 resto 3
+//                              101 0010 0001 0000 0100 0001 0001 0010
+//        int M = 151552257;    1001_0000_1000_1000_0001_0000_0001          div 7 resto 0
+//        int M = 151552246;    1001_0000_1000_1000_0000_1111_0110          div 7 resto 0
+//        int M = 2368003;      10_0100_0010_0010_0000_0011                 div 5 resto 2
+//        int M = 336132;       101_0010_0001_0000_0100                     div 4 resto 3
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter an integer: ");
+        int N = scanner.nextInt(); // Lê o próximo número inteiro da entrada
+        System.out.println("You typed: " + N);
+        scanner.close();
+
+        if (N == -1) N = 8388605;
+
+        System.out.println("Number is: " + N);
+        System.out.println("Binary Representation: " + formatBinaryRepresentation(Integer.toBinaryString(N)));
+        System.out.println("Solution is: " + solution(N));
+    }
+
+    private static int solution(int N) {
         String number = Integer.toBinaryString(N);
 
         int binaryGap = 0;
@@ -23,25 +44,6 @@ public class BinaryGap {
         return binaryGap;
     }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        // Solicita a entrada do usuário
-//        System.out.print("Enter an integer: ");
-        int N = 336132;
-
-//        int N = 1376796946;   101_0010_0001_0000_0100_0001_0001_0010      div 7 resto 3
-//                              101 0010 0001 0000 0100 0001 0001 0010
-//        int M = 151552257;    1001_0000_1000_1000_0001_0000_0001          div 7 resto 0
-//        int M = 151552246;    1001_0000_1000_1000_0000_1111_0110          div 7 resto 0
-//        int M = 2368003;      10_0100_0010_0010_0000_0011                 div 5 resto 2
-//        int M = 336132;       101_0010_0001_0000_0100                     div 4 resto 3
-
-        System.out.println("Number is: " + N);
-        System.out.println("Binary Representation: " + formatBinaryRepresentation(Integer.toBinaryString(N)));
-        System.out.println("Solution is: " + solution(N));
-    }
-
     private static String formatBinaryRepresentation(String binaryString) {
 
         int length = binaryString.length();
@@ -54,40 +56,30 @@ public class BinaryGap {
             return binaryString;
         }
 
-        int final_length = finalLength(length, div, rest);
-        System.out.println("Final Length: " + final_length);
+        int finalLength = finalLength(length, div, rest);
+        System.out.println("Final Length: " + finalLength);
 
-        char[] arrayWithSeparator = new char[final_length];
-        System.out.println("Array Length: " + arrayWithSeparator.length);
+        char[] arrayWithSeparator = new char[finalLength];
 
-        int i, j = 0;
-        for (i = 0; j <= rest; i++) {
-            if (i / rest == 0) {
-                arrayWithSeparator[j] = binaryString.charAt(i);
-            } else {
-                arrayWithSeparator[j] = '_';
-            }
-            j++;
+        int binaryIndex = 0; // Índice para percorrer binaryString
+        int arrayIndex = 0;  // Índice para preencher arrayWithSeparator
+        while (binaryIndex < rest) {
+            arrayWithSeparator[arrayIndex++] = binaryString.charAt(binaryIndex++);
+        }
+        if (rest > 0 && binaryIndex < length) { // Adiciona '_' apenas se houver mais caracteres
+            arrayWithSeparator[arrayIndex++] = '_';
         }
 
-        i--;
-
-        int internalCounter = 1;
-        for (; j < final_length; i++) {
-            if (internalCounter % 5 == 0) {
-                arrayWithSeparator[j] = '_';
-                arrayWithSeparator[j + 1] = binaryString.charAt(i);
-                internalCounter = 1;
-                i--;
-            } else {
-                arrayWithSeparator[j] = binaryString.charAt(i);
-                internalCounter++;
+        // Parte principal - processando blocos de 4
+        int counter = 0;
+        while (binaryIndex < length) {
+            arrayWithSeparator[arrayIndex++] = binaryString.charAt(binaryIndex++);
+            counter++;
+            if (counter % 4 == 0 && binaryIndex < length) { // Adiciona '_' após cada bloco de 4
+                arrayWithSeparator[arrayIndex++] = '_';
             }
-            j++;
         }
-        System.out.println(arrayWithSeparator);
-
-        return "hello";
+        return new String(arrayWithSeparator);
     }
 
     private static int finalLength(int length, int div, int rest) {
