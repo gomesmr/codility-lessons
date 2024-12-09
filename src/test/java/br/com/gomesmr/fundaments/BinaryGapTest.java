@@ -47,10 +47,10 @@ class BinaryGapTest {
     }
 
     @Test
-    void testFinalLength() {
-        assertEquals(39, BinaryGap.finalLength(32, 8, 0)); // Binary length: 32, Div: 8, Rest: 0
-        assertEquals(41, BinaryGap.finalLength(33, 8, 1)); // Binary length: 33, Div: 8, Rest: 1
-        assertEquals(43, BinaryGap.finalLength(35, 8, 3)); // Binary length: 35, Div: 8, Rest: 3
-        assertEquals(34, BinaryGap.finalLength(28, 7, 0)); // Binary length: 28, Div: 7, Rest: 0
+    void testCalculateFinalLength() {
+        assertEquals(39, BinaryGap.calculateFinalLength(32, 8, 0)); // Binary length: 32, Div: 8, Rest: 0
+        assertEquals(41, BinaryGap.calculateFinalLength(33, 8, 1)); // Binary length: 33, Div: 8, Rest: 1
+        assertEquals(43, BinaryGap.calculateFinalLength(35, 8, 3)); // Binary length: 35, Div: 8, Rest: 3
+        assertEquals(34, BinaryGap.calculateFinalLength(28, 7, 0)); // Binary length: 28, Div: 7, Rest: 0
     }
 }

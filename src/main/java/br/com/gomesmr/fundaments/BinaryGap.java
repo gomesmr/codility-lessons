@@ -47,42 +47,42 @@ public class BinaryGap {
     public static String formatBinaryRepresentation(String binaryString) {
 
         int length = binaryString.length();
-        int div = length / 4;
-        int rest = length % 4;
+        int fullBlocks = length / 4;
+        int remainingCharacters = length % 4;
 
-        System.out.println("Length: " + length + ", Div: " + div + ", Resto: " + rest);
+        System.out.println("Length: " + length + ", Num Full Blocks: " + fullBlocks + ", Remaining Chars: " + remainingCharacters);
 
-        if (div <= 1 && rest == 0) {
+        if (fullBlocks <= 1 && remainingCharacters == 0) {
             return binaryString;
         }
 
-        int finalLength = finalLength(length, div, rest);
+        int finalLength = calculateFinalLength(length, fullBlocks, remainingCharacters);
         System.out.println("Final Length: " + finalLength);
 
-        char[] arrayWithSeparator = new char[finalLength];
+        char[] formattedArray = new char[finalLength];
 
         int binaryIndex = 0; // Índice para percorrer binaryString
         int arrayIndex = 0;  // Índice para preencher arrayWithSeparator
-        while (binaryIndex < rest) {
-            arrayWithSeparator[arrayIndex++] = binaryString.charAt(binaryIndex++);
+        while (binaryIndex < remainingCharacters) {
+            formattedArray[arrayIndex++] = binaryString.charAt(binaryIndex++);
         }
-        if (rest > 0 && binaryIndex < length) { // Adiciona '_' apenas se houver mais caracteres
-            arrayWithSeparator[arrayIndex++] = '_';
+        if (remainingCharacters > 0 && binaryIndex < length) { // Adiciona '_' apenas se houver mais caracteres
+            formattedArray[arrayIndex++] = '_';
         }
 
         // Parte principal - processando blocos de 4
         int counter = 0;
         while (binaryIndex < length) {
-            arrayWithSeparator[arrayIndex++] = binaryString.charAt(binaryIndex++);
+            formattedArray[arrayIndex++] = binaryString.charAt(binaryIndex++);
             counter++;
             if (counter % 4 == 0 && binaryIndex < length) { // Adiciona '_' após cada bloco de 4
-                arrayWithSeparator[arrayIndex++] = '_';
+                formattedArray[arrayIndex++] = '_';
             }
         }
-        return new String(arrayWithSeparator);
+        return new String(formattedArray);
     }
 
-    public static int finalLength(int length, int div, int rest) {
+    public static int calculateFinalLength(int length, int div, int rest) {
         if (rest > 0) {
             return length + div;
         }
