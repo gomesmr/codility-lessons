@@ -1,48 +1,50 @@
 package br.com.gomesmr.fundaments;
 
-public class MaxCounters {
+class MaxCounters {
     public static void main(String[] args) {
+        Solution solutionDepurative = new Solution();
         // Exemplo de entrada
         int N = 5; // Número de contadores
         int[] A = {3, 4, 4, 6, 1, 4, 4, 6, 2, 3, 4, 3, 6, 1}; // Operações
 
         // Chamar o metodo solution
-        int[] result = solution(N, A);
+        int[] result = solutionDepurative.solution(N, A);
 
         // Imprimir o resultado
         System.out.println("Resultado:");
-        for (int value : result) {
-            System.out.print(value + " ");
+        System.out.print("counter = [");
+        System.out.print(result[0]);
+        for (int i = 1; i < N; i++) {
+            System.out.print(", " + result[i]);
         }
+        System.out.println("]");
 
     }
+}
 
-    protected static int[] solution(int N, int[] A) {
+class Solution {
+    public int[] solution(int N, int[] A) {
         // Implement your solution here
         int[] counter = new int[N];
-        int max = 0;
-
+        int maxGlobal = 0;
+        int maxApplied = 0;
         for (int a : A) {
-            if (a <= N) {
-                increase(counter, a);
-                max = Math.max(max, counter[a - 1]);
-            } else maxCounter(counter, max);
+            if (a >= 1 && a <= N) {
+                if (maxApplied > counter[a - 1]) {
+                    counter[a - 1] = maxApplied;
+                }
+                counter[a - 1]++;
+                maxGlobal = Math.max(maxGlobal, counter[a - 1]);
+            } else if (a == N + 1) {
+                maxApplied = maxGlobal;
+            }
         }
 
+        for (int i = 0; i < N; i++) {
+            if (counter[i] < maxApplied) {
+                counter[i] = maxApplied;
+            }
+        }
         return counter;
-    }
-
-    public static void increase(int[] counter, int x) {
-        counter[x - 1] += 1;
-    }
-
-    public static void maxCounter(int[] counter, int max) {
-        for (int i = 0; i <= counter.length - 1; i++) {
-            counter[i] = max;
-        }
-    }
-
-    public int findMax(int a, int max) {
-        return Math.max(a, max);
     }
 }

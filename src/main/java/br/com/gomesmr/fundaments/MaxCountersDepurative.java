@@ -1,8 +1,8 @@
 package br.com.gomesmr.fundaments;
 
-public class MaxCountersDepurative {
+class MaxCountersDepurative {
     public static void main(String[] args) {
-        Solution maxCounters = new Solution();
+        SolutionDepurative maxCounters = new SolutionDepurative();
         // Exemplo de entrada
         int N = 7; // Número de contadores
         int[] A = {3, 4, 4, 6, 1, 4, 4, 6, 2, 3, 4, 3, 6, 1, 8, 5, 1, 3, 4, 3, 3, 3, 3, 8, 4, 6, 2, 3, 4, 3, 6, 8, 5, 5, 1, 3}; // Operações
@@ -19,7 +19,7 @@ public class MaxCountersDepurative {
     }
 }
 
-class Solution {
+class SolutionDepurative {
     public int[] solution(int N, int[] A) {
         // Implement your solution here
         int[] counter = new int[N];

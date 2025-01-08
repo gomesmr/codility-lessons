@@ -1,6 +1,6 @@
 package br.com.gomesmr.fundaments;
 
-public class MaxCounterRefacted {
+class MaxCounterRefacted {
     public static void main(String[] args) {
         Solutions maxCounters = new Solutions();
 
