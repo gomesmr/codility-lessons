@@ -2,13 +2,13 @@ package br.com.gomesmr.fundaments;
 
 class MaxCounters {
     public static void main(String[] args) {
-        Solution solutionDepurative = new Solution();
+        Solution maxCounters = new Solution();
         // Exemplo de entrada
         int N = 5; // Número de contadores
         int[] A = {3, 4, 4, 6, 1, 4, 4, 6, 2, 3, 4, 3, 6, 1}; // Operações
 
         // Chamar o metodo solution
-        int[] result = solutionDepurative.solution(N, A);
+        int[] result = maxCounters.solution(N, A);
 
         // Imprimir o resultado
         System.out.println("Resultado:");
